@@ -18,7 +18,7 @@ tar -xf php-${PHPVER}.tar.xz
 cd php-${PHPVER}
 
 mkdir -p $PREFIX
-./configure --prefix=$PREFIX --with-libdir=lib64 --enable-fpm --with-pdo-mysql --with-mysqli --with-pdo-pgsql --with-pgsql --enable-bcmath --enable-calendar --enable-exif --enable-ftp --enable-mbstring --enable-soap --enable-zip --with-curl --with-freetype-dir --with-gd --with-gettext --with-gmp --with-iconv --with-imap --with-imap-ssl --with-jpeg-dir --with-kerberos --with-ldap --with-mcrypt --with-mhash --with-openssl --with-png-dir --with-pspell --with-tidy --with-xmlrpc --with-xsl --with-zlib-dir --without-pear --enable-sockets --enable-intl --with-mysql-sock=/var/lib/mysql/mysql.sock --with-webp-dir=/usr/lib64
+./configure --prefix=$PREFIX --with-libdir=lib64 --enable-fpm --with-pdo-mysql --with-mysqli --with-pdo-pgsql --with-pgsql --enable-bcmath --enable-calendar --enable-exif --enable-ftp --enable-mbstring --enable-soap --enable-zip --with-curl --with-freetype-dir --with-gd --with-gettext --with-gmp --with-iconv --with-imap --with-imap-ssl --with-jpeg-dir --with-kerberos --with-ldap --with-mcrypt --with-mhash --with-openssl --with-png-dir --with-pspell --with-tidy --with-xmlrpc --with-xsl --with-zlib-dir --without-pear --enable-sockets --enable-intl --with-webp-dir --enable-pcntl --with-mysql-sock=/var/lib/mysql/mysql.sock
 
 time make -j8
 make install
