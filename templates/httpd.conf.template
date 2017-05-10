@@ -58,13 +58,6 @@ ErrorLog /home/PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_error.log
   ProxyPreserveHost on
   AddDefaultCharset utf-8
 
-  #Options +ExecCGI
-  #AddHandler cgi-script .cgi
-  #Alias /cgi-bin/php56.cgi /home/php-cgi/php56.cgi
-  #Action php56-cgi /cgi-bin/php56.cgi
-  #AddHandler php56-cgi .php
-  #SetEnv PHP_INI_SCAN_DIR PLACEHOLDER_APPDIR1
-
   <Proxy "unix:/PLACEHOLDER_ROOTDIR/var/run/php-fpm.sock" enablereuse=on max=10>
   </Proxy>
 
