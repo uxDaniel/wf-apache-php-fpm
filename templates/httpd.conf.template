@@ -1,0 +1,84 @@
+LoadModule mpm_event_module          modules/mod_mpm_event.so
+
+LoadModule authz_core_module         modules/mod_authz_core.so
+#LoadModule authz_host_module         modules/mod_authz_host.so
+#LoadModule authz_groupfile_module    modules/mod_authz_groupfile.so
+#LoadModule authz_owner_module        modules/mod_authz_owner.so
+#LoadModule authz_user_module         modules/mod_authz_user.so
+LoadModule proxy_module              modules/mod_proxy.so
+LoadModule proxy_fcgi_module         modules/mod_proxy_fcgi.so
+#LoadModule proxy_connect_module      modules/mod_proxy_connect.so
+#LoadModule proxy_http_module         modules/mod_proxy_http.so
+#LoadModule proxy_ftp_module          modules/mod_proxy_ftp.so
+LoadModule mime_module               modules/mod_mime.so
+LoadModule dir_module                modules/mod_dir.so
+LoadModule alias_module              modules/mod_alias.so
+LoadModule autoindex_module          modules/mod_autoindex.so
+LoadModule log_config_module         modules/mod_log_config.so
+LoadModule rewrite_module            modules/mod_rewrite.so
+#LoadModule remoteip_module           modules/mod_remoteip.so
+#LoadModule dav_module                modules/mod_dav.so
+#LoadModule dav_fs_module             modules/mod_dav_fs.so
+#LoadModule auth_basic_module         modules/mod_auth_basic.so
+#LoadModule auth_digest_module        modules/mod_auth_digest.so
+#LoadModule authn_file_module         modules/mod_authn_file.so
+#LoadModule cgid_module               modules/mod_cgid.so
+#LoadModule deflate_module            modules/mod_deflate.so
+#LoadModule setenvif_module           modules/mod_setenvif.so
+#LoadModule headers_module            modules/mod_headers.so
+#LoadModule include_module            modules/mod_include.so
+#LoadModule expires_module            modules/mod_expires.so
+#LoadModule env_module                modules/mod_env.so
+#LoadModule actions_module            modules/mod_actions.so
+#LoadModule negotiation_module        modules/mod_negotiation.so
+#LoadModule speling_module            modules/mod_speling.so
+#LoadModule access_compat_module      modules/mod_access_compat.so
+#LoadModule unixd_module              modules/mod_unixd.so
+
+ServerName 127.0.0.1:PLACEHOLDER_PORT
+ServerRoot PLACEHOLDER_ROOTDIR
+DefaultRuntimeDir PLACEHOLDER_ROOTDIR/var/run
+Listen 127.0.0.1:PLACEHOLDER_PORT
+KeepAliveTimeout 3
+KeepAlive Off
+MaxRequestsPerChild 5000
+Timeout 60
+PidFile PLACEHOLDER_ROOTDIR/logs/httpd.pid
+TypesConfig PLACEHOLDER_ROOTDIR/conf/mime.types
+LogLevel warn
+LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+CustomLog /home/PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_access.log combined
+ErrorLog /home/PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_error.log
+
+<VirtualHost 127.0.0.1:PLACEHOLDER_PORT>
+  ServerName PLACEHOLDER_DOMAIN1
+  #ServerAlias www.PLACEHOLDER_DOMAIN1
+  DocumentRoot PLACEHOLDER_APPDIR1
+  DirectoryIndex index.html index.htm index.cgi index.php
+  ProxyPreserveHost on
+  AddDefaultCharset utf-8
+
+  #Options +ExecCGI
+  #AddHandler cgi-script .cgi
+  #Alias /cgi-bin/php56.cgi /home/php-cgi/php56.cgi
+  #Action php56-cgi /cgi-bin/php56.cgi
+  #AddHandler php56-cgi .php
+  #SetEnv PHP_INI_SCAN_DIR PLACEHOLDER_APPDIR1
+
+  <Proxy "unix:/PLACEHOLDER_ROOTDIR/var/run/php-fpm.sock" enablereuse=on max=10>
+  </Proxy>
+
+  Include PLACEHOLDER_ROOTDIR/conf/extra/httpd-autoindex.conf
+  <Directory PLACEHOLDER_APPDIR1>
+    AllowOverride all
+    <FilesMatch \.ht(access|passwd)>
+      Require all denied
+    </FilesMatch>
+    <FilesMatch (\.user\.ini|php\.ini)>
+      Require all denied
+    </FilesMatch>
+    <FilesMatch \.php$>
+      SetHandler "proxy:unix:PLACEHOLDER_ROOTDIR/var/run/php-fpm.sock|fcgi://localhost"
+    </FilesMatch>
+  </Directory>
+</VirtualHost>
