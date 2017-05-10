@@ -1,3 +1,6 @@
+[global]
+pid = PLACEHOLDER_ROOTDIR/var/run/php-fpm.pid
+
 [www]
 listen = PLACEHOLDER_ROOTDIR/var/run/php-fpm.sock
 pm = dynamic
