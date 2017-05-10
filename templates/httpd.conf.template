@@ -43,7 +43,7 @@ KeepAliveTimeout 3
 KeepAlive Off
 MaxRequestsPerChild 5000
 Timeout 60
-PidFile PLACEHOLDER_ROOTDIR/logs/httpd.pid
+PidFile PLACEHOLDER_ROOTDIR/var/run/httpd.pid
 TypesConfig PLACEHOLDER_ROOTDIR/conf/mime.types
 LogLevel warn
 LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
