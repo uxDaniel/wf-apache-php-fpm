@@ -3,21 +3,19 @@
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$MYDIR"
 
-mkdir -p "$MYDIR/src"
-
 # PHP Version
 PHPVER=7.1.4
 
 # Install Prefix
 PREFIX="$HOME/shared/php-${PHPVER}"
-mkdir -p $PREFIX
 
+mkdir -p "$PREFIX/src"
 
 ###########################################################
 # PHP 7.1.4
 # original: http://us1.php.net/get/php-7.1.4.tar.xz
 ###########################################################
-cd "$MYDIR/src"
+cd "$PREFIX/src"
 wget "http://us1.php.net/get/php-${PHPVER}.tar.xz/from/this/mirror" -O php-${PHPVER}.tar.xz
 tar -xf php-${PHPVER}.tar.xz
 cd php-${PHPVER}
@@ -31,7 +29,7 @@ make install
 # APR 1.5.2
 # original: http://apache.communilink.net/apr/apr-1.5.2.tar.bz2
 ###########################################################
-cd "$MYDIR/src"
+cd "$PREFIX/src"
 wget 'http://apache.communilink.net/apr/apr-1.5.2.tar.bz2'
 tar -xf apr-1.5.2.tar.bz2
 cd apr-1.5.2
@@ -43,7 +41,7 @@ make install
 # APR-Util 1.5.4
 # original: http://apache.communilink.net/apr/apr-util-1.5.4.tar.bz2
 ###########################################################
-cd "$MYDIR/src"
+cd "$PREFIX/src"
 wget 'http://apache.communilink.net/apr/apr-util-1.5.4.tar.bz2'
 tar -xf apr-util-1.5.4.tar.bz2
 cd apr-util-1.5.4
@@ -55,7 +53,7 @@ make install
 # Apache 2.4.25
 # original: http://apache.communilink.net//httpd/httpd-2.4.25.tar.bz2
 ###########################################################
-cd "$MYDIR/src"
+cd "$PREFIX/src"
 wget 'http://apache.communilink.net//httpd/httpd-2.4.25.tar.bz2'
 tar -xf httpd-2.4.25.tar.bz2
 cd httpd-2.4.25
@@ -69,13 +67,14 @@ make install
 
 
 #--- Do Substitutions ---
-cd $MYDIR/templates
+cp -r "$MYDIR/templates" "$PREFIX/src"
+cd "$PREFIX/src/templates"
 bash substitutions.bash
 
 #--- Initial Config ---
 mv "$PREFIX/conf/httpd.conf" "$PREFIX/conf/httpd.conf.original"
-cp "$MYDIR/templates/httpd.conf.template" "$PREFIX/conf/httpd.conf"
-cp "$MYDIR/templates/php-fpm.conf.template" "$PREFIX/etc/php-fpm.conf"
+cp "$PREFIX/src/templates/httpd.conf.template" "$PREFIX/conf/httpd.conf"
+cp "$PREFIX/src/templates/php-fpm.conf.template" "$PREFIX/etc/php-fpm.conf"
 
 #--- Create php.ini ---
 touch "$PREFIX/lib/php.ini"
