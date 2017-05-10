@@ -66,3 +66,43 @@ cd httpd-2.4.25
             --with-apr-util="$PREFIX"
 make -j8
 make install
+
+
+#--- Do Substitutions ---
+cd $MYDIR/templates
+bash substitutions.bash
+
+#--- Initial Config ---
+mv "$PREFIX/conf/httpd.conf" "$PREFIX/conf/httpd.conf.original"
+cp "$MYDIR/templates/httpd.conf.template" "$PREFIX/conf/httpd.conf"
+cp "$MYDIR/templates/php-fpm.conf.template" "$PREFIX/etc/php-fpm.conf"
+
+#--- Create php.ini ---
+touch "$PREFIX/lib/php.ini"
+
+#--- Create start/stop/restart scripts ---
+cd "$PREFIX/bin"
+
+cat << "EOF" > start
+#!/bin/bash
+MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+"$MYDIR/../sbin/php-fpm"
+"$MYDIR/apachectl" start
+EOF
+
+cat << "EOF" > stop
+#!/bin/bash
+MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+kill $(cat "$MYDIR/../var/run/php-fpm.pid") &> /dev/null
+"$MYDIR/apachectl" stop
+EOF
+
+cat << "EOF" > restart
+#!/bin/bash
+MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+"$MYDIR/stop"
+sleep 1
+"$MYDIR/start"
+EOF
+
+chmod 755 start stop restart
