@@ -1,5 +1,6 @@
 LoadModule mpm_event_module          modules/mod_mpm_event.so
 
+LoadModule unixd_module              modules/mod_unixd.so
 LoadModule authz_core_module         modules/mod_authz_core.so
 #LoadModule authz_host_module         modules/mod_authz_host.so
 #LoadModule authz_groupfile_module    modules/mod_authz_groupfile.so
@@ -33,7 +34,6 @@ LoadModule rewrite_module            modules/mod_rewrite.so
 #LoadModule negotiation_module        modules/mod_negotiation.so
 #LoadModule speling_module            modules/mod_speling.so
 #LoadModule access_compat_module      modules/mod_access_compat.so
-#LoadModule unixd_module              modules/mod_unixd.so
 
 ServerName 127.0.0.1:PLACEHOLDER_PORT
 ServerRoot PLACEHOLDER_ROOTDIR
