@@ -1,0 +1,7 @@
+#!bash
+
+STACKNAME="phpfpm"
+PREFIX="$HOME/webapps/phpfpm"
+PORT="77777"
+DOMAIN1="mydomain.com"
+APPDIR1="$HOME/webapps/app1"

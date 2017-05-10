@@ -3,11 +3,7 @@
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$MYDIR"
 
-# PHP Version
-PHPVER=7.1.4
-
-# Install Prefix
-PREFIX="$HOME/shared/php-${PHPVER}"
+source "$MYDIR/config"
 
 mkdir -p "$PREFIX/src"
 
@@ -16,9 +12,9 @@ mkdir -p "$PREFIX/src"
 # original: http://us1.php.net/get/php-7.1.4.tar.xz
 ###########################################################
 cd "$PREFIX/src"
-wget "http://us1.php.net/get/php-${PHPVER}.tar.xz/from/this/mirror" -O php-${PHPVER}.tar.xz
-tar -xf php-${PHPVER}.tar.xz
-cd php-${PHPVER}
+wget "http://us1.php.net/get/php-7.1.4.tar.xz/from/this/mirror" -O php-7.1.4.tar.xz
+tar -xf php-7.1.4.tar.xz
+cd php-7.1.4
 
 ./configure --prefix="$PREFIX" --with-libdir=lib64 --enable-fpm --with-pdo-mysql --with-mysqli --with-pdo-pgsql --with-pgsql --enable-bcmath --enable-calendar --enable-exif --enable-ftp --enable-mbstring --enable-soap --enable-zip --with-curl --with-freetype-dir --with-gd --with-gettext --with-gmp --with-iconv --with-imap --with-imap-ssl --with-jpeg-dir --with-kerberos --with-ldap --with-mcrypt --with-mhash --with-openssl --with-png-dir --with-pspell --with-tidy --with-xmlrpc --with-xsl --with-zlib-dir --without-pear --enable-sockets --enable-intl --with-webp-dir --enable-pcntl --with-mysql-sock=/var/lib/mysql/mysql.sock
 
@@ -67,9 +63,10 @@ make install
 
 
 #--- Do Substitutions ---
+mkdir -p "$PREFIX/src"
 cp -r "$MYDIR/templates" "$PREFIX/src"
 cd "$PREFIX/src/templates"
-bash substitutions.bash
+source substitutions.bash
 
 #--- Initial Config ---
 mv "$PREFIX/conf/httpd.conf" "$PREFIX/conf/httpd.conf.original"
@@ -105,3 +102,6 @@ sleep 1
 EOF
 
 chmod 755 start stop restart
+
+#--- Remove temporary files ---
+rm -r "$PREFIX/src"

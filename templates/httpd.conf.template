@@ -36,15 +36,15 @@ LoadModule rewrite_module            modules/mod_rewrite.so
 #LoadModule access_compat_module      modules/mod_access_compat.so
 
 ServerName 127.0.0.1:PLACEHOLDER_PORT
-ServerRoot PLACEHOLDER_ROOTDIR
-DefaultRuntimeDir PLACEHOLDER_ROOTDIR/var/run
+ServerRoot PLACEHOLDER_PREFIX
+DefaultRuntimeDir PLACEHOLDER_PREFIX/var/run
 Listen 127.0.0.1:PLACEHOLDER_PORT
 KeepAliveTimeout 3
 KeepAlive Off
 MaxRequestsPerChild 5000
 Timeout 60
-PidFile PLACEHOLDER_ROOTDIR/var/run/httpd.pid
-TypesConfig PLACEHOLDER_ROOTDIR/conf/mime.types
+PidFile PLACEHOLDER_PREFIX/var/run/httpd.pid
+TypesConfig PLACEHOLDER_PREFIX/conf/mime.types
 LogLevel warn
 LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
 CustomLog PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_access.log combined
@@ -58,10 +58,10 @@ ErrorLog PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_error.log
   ProxyPreserveHost on
   AddDefaultCharset utf-8
 
-  <Proxy "unix:/PLACEHOLDER_ROOTDIR/var/run/php-fpm.sock" enablereuse=on max=10>
+  <Proxy "unix:/PLACEHOLDER_PREFIX/var/run/php-fpm.sock" enablereuse=on max=10>
   </Proxy>
 
-  Include PLACEHOLDER_ROOTDIR/conf/extra/httpd-autoindex.conf
+  Include PLACEHOLDER_PREFIX/conf/extra/httpd-autoindex.conf
   <Directory PLACEHOLDER_APPDIR1>
     AllowOverride all
     <FilesMatch \.ht(access|passwd)>
@@ -71,7 +71,7 @@ ErrorLog PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_error.log
       Require all denied
     </FilesMatch>
     <FilesMatch \.php$>
-      SetHandler "proxy:unix:PLACEHOLDER_ROOTDIR/var/run/php-fpm.sock|fcgi://localhost"
+      SetHandler "proxy:unix:PLACEHOLDER_PREFIX/var/run/php-fpm.sock|fcgi://localhost"
     </FilesMatch>
   </Directory>
 </VirtualHost>
