@@ -47,8 +47,8 @@ PidFile PLACEHOLDER_ROOTDIR/logs/httpd.pid
 TypesConfig PLACEHOLDER_ROOTDIR/conf/mime.types
 LogLevel warn
 LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
-CustomLog /home/PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_access.log combined
-ErrorLog /home/PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_error.log
+CustomLog PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_access.log combined
+ErrorLog PLACEHOLDER_HOME/logs/user/PLACEHOLDER_STACKNAME_error.log
 
 <VirtualHost 127.0.0.1:PLACEHOLDER_PORT>
   ServerName PLACEHOLDER_DOMAIN1
