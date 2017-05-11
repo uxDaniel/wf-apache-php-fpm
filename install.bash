@@ -109,3 +109,6 @@ rm -r "$PREFIX/src"
 #--- Create cron entry ---
 line="\n# $STACKNAME stack\n*/20 * * * * $PREFIX/bin/start"
 (crontab -l; echo -e "$line" ) | crontab -
+
+#--- Start the application ---
+$PREFIX/bin/start
