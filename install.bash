@@ -18,7 +18,7 @@ cd php-7.1.4
 
 ./configure --prefix="$PREFIX" --with-libdir=lib64 --enable-fpm --with-pdo-mysql --with-mysqli --with-pdo-pgsql --with-pgsql --enable-bcmath --enable-calendar --enable-exif --enable-ftp --enable-mbstring --enable-soap --enable-zip --with-curl --with-freetype-dir --with-gd --with-gettext --with-gmp --with-iconv --with-imap --with-imap-ssl --with-jpeg-dir --with-kerberos --with-ldap --with-mcrypt --with-mhash --with-openssl --with-png-dir --with-pspell --with-tidy --with-xmlrpc --with-xsl --with-zlib-dir --without-pear --enable-sockets --enable-intl --with-webp-dir --enable-pcntl --with-mysql-sock=/var/lib/mysql/mysql.sock
 
-make -j8
+make -j4
 make install
 
 ###########################################################
@@ -30,7 +30,7 @@ wget 'http://mirror.ryansanden.com/phpfpm-7.1.4/apr-1.5.2.tar.bz2'
 tar -xf apr-1.5.2.tar.bz2
 cd apr-1.5.2
 ./configure --prefix="$PREFIX"
-make -j8
+make -j4
 make install
 
 ###########################################################
@@ -42,7 +42,7 @@ wget 'http://mirror.ryansanden.com/phpfpm-7.1.4/apr-util-1.5.4.tar.bz2'
 tar -xf apr-util-1.5.4.tar.bz2
 cd apr-util-1.5.4
 ./configure --prefix="$PREFIX" --with-apr="$PREFIX"
-make -j8
+make -j4
 make install
 
 ###########################################################
@@ -58,7 +58,7 @@ cd httpd-2.4.25
             --enable-mpms-shared=all \
             --with-apr="$PREFIX" \
             --with-apr-util="$PREFIX"
-make -j8
+make -j4
 make install
 
 
