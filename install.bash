@@ -105,3 +105,7 @@ chmod 755 start stop restart
 
 #--- Remove temporary files ---
 rm -r "$PREFIX/src"
+
+#--- Create cron entry ---
+line="\n# $STACKNAME stack\n*/20 * * * * $PREFIX/bin/start"
+(crontab -l; echo -e "$line" ) | crontab -
