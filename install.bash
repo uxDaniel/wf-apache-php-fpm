@@ -69,6 +69,8 @@ cd "$PREFIX/src/templates"
 source substitutions.bash
 
 #--- Initial Config ---
+mkdir -p "$HOME/logs/user"
+mkdir -p "$PREFIX/var/run"
 mv "$PREFIX/conf/httpd.conf" "$PREFIX/conf/httpd.conf.original"
 cp "$PREFIX/src/templates/httpd.conf.template" "$PREFIX/conf/httpd.conf"
 cp "$PREFIX/src/templates/php-fpm.conf.template" "$PREFIX/etc/php-fpm.conf"
