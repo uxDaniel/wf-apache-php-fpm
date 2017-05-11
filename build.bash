@@ -12,7 +12,7 @@ mkdir -p "$PREFIX/src"
 # original: http://us1.php.net/get/php-7.1.4.tar.xz
 ###########################################################
 cd "$PREFIX/src"
-wget "http://us1.php.net/get/php-7.1.4.tar.xz/from/this/mirror" -O php-7.1.4.tar.xz
+wget 'http://mirror.ryansanden.com/phpfpm-7.1.4/php-7.1.4.tar.xz'
 tar -xf php-7.1.4.tar.xz
 cd php-7.1.4
 
@@ -26,7 +26,7 @@ make install
 # original: http://apache.communilink.net/apr/apr-1.5.2.tar.bz2
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://apache.communilink.net/apr/apr-1.5.2.tar.bz2'
+wget 'http://mirror.ryansanden.com/phpfpm-7.1.4/apr-1.5.2.tar.bz2'
 tar -xf apr-1.5.2.tar.bz2
 cd apr-1.5.2
 ./configure --prefix="$PREFIX"
@@ -38,7 +38,7 @@ make install
 # original: http://apache.communilink.net/apr/apr-util-1.5.4.tar.bz2
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://apache.communilink.net/apr/apr-util-1.5.4.tar.bz2'
+wget 'http://mirror.ryansanden.com/phpfpm-7.1.4/apr-util-1.5.4.tar.bz2'
 tar -xf apr-util-1.5.4.tar.bz2
 cd apr-util-1.5.4
 ./configure --prefix="$PREFIX" --with-apr="$PREFIX"
@@ -50,7 +50,7 @@ make install
 # original: http://apache.communilink.net//httpd/httpd-2.4.25.tar.bz2
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://apache.communilink.net//httpd/httpd-2.4.25.tar.bz2'
+wget 'http://mirror.ryansanden.com/phpfpm-7.1.4/httpd-2.4.25.tar.bz2'
 tar -xf httpd-2.4.25.tar.bz2
 cd httpd-2.4.25
 ./configure --prefix="$PREFIX" \
