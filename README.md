@@ -22,3 +22,6 @@ After installation, the following are done for you:
   - `start`, `stop`, and `restart` scripts are created in the `$PREFIX/bin` directory
   - The `start` script is run to start the instance
   - A cronjob is created to start the instance once every 20 minutes if it's not running
+
+Dependencies:
+  - `yum install -y gcc gcc-c++ mysql mysql-devel postgresql postgresql-devel libwebp libwebp-devel libjpeg-turbo libjpeg-turbo-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libicu libicu-devel openldap openldap-devel aspell aspell-devel libtidy libtidy-devel libxslt libxslt-devel`
