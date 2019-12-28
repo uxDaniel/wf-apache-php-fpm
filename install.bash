@@ -10,25 +10,25 @@ source "$MYDIR/config"
 mkdir -p "$PREFIX/src"
 
 ###########################################################
-# PHP 7.2.11
-# original: http://us1.php.net/get/php-7.2.11.tar.xz
+# PHP 7.3.6
+# original: https://www.php.net/distributions/php-7.3.6.tar.xz
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://mirror.ryansanden.com/phpfpm-7.2.11/php-7.2.11.tar.xz'
-tar -xf php-7.2.11.tar.xz
-cd php-7.2.11
+wget 'http://mirror.ryansanden.com/phpfpm-7.3.6/php-7.3.6.tar.xz'
+tar -xf php-7.3.6.tar.xz
+cd php-7.3.6
 ./configure --prefix="$PREFIX" --with-libdir=lib64 --enable-fpm --with-pdo-mysql --with-mysqli --with-pdo-pgsql --with-pgsql --enable-bcmath --enable-calendar --enable-exif --enable-ftp --enable-mbstring --enable-soap --enable-zip --with-curl --with-freetype-dir --with-gd --with-gettext --with-gmp --with-iconv --with-imap-ssl --with-jpeg-dir --with-kerberos --with-ldap --with-mhash --with-openssl --with-png-dir --with-pspell --with-tidy --with-xmlrpc --with-xsl --with-zlib-dir --without-pear --enable-sockets --enable-intl --with-webp-dir --enable-pcntl --with-mysql-sock=/var/lib/mysql/mysql.sock
 make -j4
 make install
 
 ###########################################################
-# APR 1.6.5
-# original: http://apache.communilink.net/apr/apr-1.6.5.tar.bz2
+# APR 1.7.0
+# original: http://apache.communilink.net/apr/apr-1.7.0.tar.bz2
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://mirror.ryansanden.com/phpfpm-7.2.11/apr-1.6.5.tar.bz2'
-tar -xf apr-1.6.5.tar.bz2
-cd apr-1.6.5
+wget 'http://mirror.ryansanden.com/phpfpm-7.3.6/apr-1.7.0.tar.bz2'
+tar -xf apr-1.7.0.tar.bz2
+cd apr-1.7.0
 ./configure --prefix="$PREFIX"
 make -j4
 make install
@@ -38,7 +38,7 @@ make install
 # original: http://apache.communilink.net/apr/apr-util-1.6.1.tar.bz2
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://mirror.ryansanden.com/phpfpm-7.2.11/apr-util-1.6.1.tar.bz2'
+wget 'http://mirror.ryansanden.com/phpfpm-7.3.6/apr-util-1.6.1.tar.bz2'
 tar -xf apr-util-1.6.1.tar.bz2
 cd apr-util-1.6.1
 ./configure --prefix="$PREFIX" --with-apr="$PREFIX"
@@ -46,13 +46,13 @@ make -j4
 make install
 
 ###########################################################
-# Apache 2.4.37
-# original: http://apache.communilink.net/httpd/httpd-2.4.37.tar.bz2
+# Apache 2.4.41
+# original: http://apache.communilink.net/httpd/httpd-2.4.41.tar.bz2
 ###########################################################
 cd "$PREFIX/src"
-wget 'http://mirror.ryansanden.com/phpfpm-7.2.11/httpd-2.4.37.tar.bz2'
-tar -xf httpd-2.4.37.tar.bz2
-cd httpd-2.4.37
+wget 'http://mirror.ryansanden.com/phpfpm-7.3.6/httpd-2.4.41.tar.bz2'
+tar -xf httpd-2.4.41.tar.bz2
+cd httpd-2.4.41
 ./configure --prefix="$PREFIX" --enable-mpms-shared=all --enable-mods-shared=all --with-apr="$PREFIX" --with-apr-util="$PREFIX"
 make -j4
 make install
